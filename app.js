@@ -2,10 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const app = express();
+const {sequelize} = require('./models/index');
+const userRouter = require('./router/users');
 
-const mysql = require('./config/mysql');
-const mysqlConn = mysql.init();
-mysql.open(mysqlConn);
 
 app.set('port', process.env.PORT || 4444);
 app.set('view engine', 'html');
@@ -14,10 +13,21 @@ app.engine('html', require('ejs').renderFile);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.get('/',(req, res)=>{
+sequelize.sync({force: false})
+    .then(() => {
+        console.log('데이터베이스 연결 성공');
+    })
+    .catch((err) => {
+        console.error(err);
+    });
+
+app.use('/users', userRouter)
+
+app.get('/', (req, res) => {
     res.render('html/index');
 });
 
-app.listen(app.get('port'),()=>{
-    console.log('http://localhost:'+app.get('port'));
+app.listen(app.get('port'), () => {
+    console.log('http://localhost:' + app.get('port'));
 });
+
