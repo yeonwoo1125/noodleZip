@@ -1,35 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap');
 body{
     background-color: rgb(255, 184, 194);
+    padding:  0px;
+    margin: 0px;
 }
 
-
-.logo{
-    margin: 0 auto;
-    position: absolute;
+img{
+    margin-left: 20px;
+    position: fixed;
     top: 50%;
-    left:50%;
-    transform: translate(-50%,-60%);
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -80%);
 }
 .circle{
-    margin: 0 auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -70%);
     width: 600px;
     height: 600px;
     background-color: rgb(255, 230, 233);
     border-radius: 50%;
 }
 
+button{
+    cursor: pointer;
+    border:  none;
+    background-color: rgb(255, 122, 137);
+    border-radius: 50px;
+    height: 70px;
+    width: 250px;
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+}
+button:hover {
+    background-color: blueviolet;
+}
+
+a{
+    text-decoration: none;
+    color: blueviolet;
+    font-weight: bold;
+}
+
+.start{
+    text-align: center;
+    margin-top: 670px;
+    font-family: 'Noto Sans KR', sans-serif;
+}
 
 .line{
-    margin: 0 auto;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 .line1{
     background-color: rgb(255, 230, 233);
-    height: 50px;
+    height: 30px;
 }
 .line2{
-
     background-color: rgb(255, 122, 137);
-    height: 100px;
+    height: 80px;
 }
 
 
