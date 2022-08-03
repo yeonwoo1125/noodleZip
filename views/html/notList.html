@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+  <title>noodle.zip</title>
+	<link rel="shortcut icon" href="img/favicon.ico">
+<link rel="stylesheet" href="css/login.css">
+<link rel="stylesheet" href="css/list.css">
+</head>
+
+<body style="overflow-x:hidden">
+  <header>
+    <img src="img/logo.png" onclick="location.href='index.html'" style="cursor: pointer; width : 100px; height : 50px;">
+    <span onclick="location.href='login.html'" style="cursor: pointer; margin-left: 15%;">로그아웃</span>
+    <span onclick="location.href='memo.html'" style="cursor: pointer; margin-left: 1%;">메모쓰기</span>
+    <span style="margin-left: 1%; color: #FF6384; cursor: pointer" onclick="location.href='list.html'">나의메모</span>
+  </header>
+  <div class="margin">
+    <div class="title">나의 메모  <b style="font-size: 18px"><%=userName %>(<%=userId %>)</b></div>
+    <hr id="title_hr">
+  </div>
+
+
+  <!-- 메모 리스트 테이블 -->
+  <div class="margin">
+    <center>
+      <div class="box" style="padding-top :120px;">
+        <p style="font-size: 30px;">메모가 존재하지 않습니다.</p>
+        <p onclick="location.href='memo.html'" style="color: #FF6384; cursor: pointer; font-size: 20px;"><b>메모쓰기</b></p>
+      </div>
+      
+    </center>
+</body>
+
+</html>
