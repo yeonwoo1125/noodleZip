@@ -77,13 +77,14 @@ button{
 }
 
 .apply {
-    width: 26%;
-    height: 60px;
-    font-size: 1.5em;
-    font-weight: 700;
-    color: #230A3F;
-    border: solid 3.5px #230A3F;
-    border-radius: 100px;
+  width: 26%;
+  height: 60px;
+  font-size: 1.5em;
+  font-weight: 700;
+  cursor: pointer;
+  border:  none;
+  background-color: rgb(255, 122, 137);
+  border-radius: 50px;
   padding-top: 1%;
   padding-bottom: 4%;
   padding-left: 5%;
@@ -91,8 +92,12 @@ button{
 	margin-top: 10%;
   margin-bottom: 10%;
   font-family: 'Noto Sans KR', sans-serif;
+  color: white;
 }
 
+.apply:hover {
+  background-color: blueviolet;
+}
 .box{
   background-color: #ffffff;
   width: 94%;

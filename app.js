@@ -21,11 +21,40 @@ sequelize.sync({force: false})
         console.error(err);
     });
 
+//이미지, css 폴더
+app.use('/', express.static("./public/css"));
+app.use('/', express.static("./public/img"));
+
 app.use('/users', userRouter)
 app.use('/memos', memoRouter)
 
+//인덱스
 app.get('/', (req, res) => {
     res.render('html/index');
+});
+//로그인
+app.get('/login', (req, res) => {
+    res.render('html/login');
+});
+//회원가입
+app.get('/join', (req, res) => {
+    res.render('html/join');
+});
+//메모리스트 -메모 있을 때 
+app.get('/list', (req, res) => {
+    res.render('html/list');
+});
+//메모리스트 -메모 없을 때 
+app.get('/notList', (req, res) => {
+    res.render('html/notList');
+});
+//메모쓰기
+app.get('/memo', (req, res) => {
+    res.render('html/memo');
+});
+//메모수정
+app.get('/memoedit', (req, res) => {
+    res.render('html/memoedit');
 });
 
 app.listen(app.get('port'), () => {

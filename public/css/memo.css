@@ -75,24 +75,27 @@ button{
   margin-bottom: 5%;
   background-color: #FF6384;
 }
-
 .apply {
-	width: 15%;
-	height: 20px;
-	font-size: 1.5em;
-	font-weight: 500;
-  color : #fff;
-  background-color: #FF6384;
-	border: 3.5px #FF6384;
-	border-radius: 100px;
+  width: 26%;
+  height: 60px;
+  font-size: 1.5em;
+  font-weight: 700;
+  cursor: pointer;
+  border:  none;
+  background-color: rgb(255, 122, 137);
+  border-radius: 50px;
   padding-top: 1%;
   padding-bottom: 4%;
   padding-left: 5%;
   padding-right: 5%;
-	margin-top: 5%;
+	margin-top: 10%;
   margin-bottom: 10%;
-  margin-left : 1%;
   font-family: 'Noto Sans KR', sans-serif;
+  color: white;
+}
+
+.apply:hover {
+  background-color: blueviolet;
 }
 
 .box{
