@@ -1,0 +1,35 @@
+body{
+    background-color: rgb(255, 184, 194);
+}
+
+
+.logo{
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%,-60%);
+}
+.circle{
+    margin: 0 auto;
+    width: 600px;
+    height: 600px;
+    background-color: rgb(255, 230, 233);
+    border-radius: 50%;
+}
+
+
+.line{
+    margin: 0 auto;
+}
+.line1{
+    background-color: rgb(255, 230, 233);
+    height: 50px;
+}
+.line2{
+
+    background-color: rgb(255, 122, 137);
+    height: 100px;
+}
+
+
