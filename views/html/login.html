@@ -6,14 +6,14 @@
   <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
   <title>noodle.zip</title>
 	<link rel="shortcut icon" href="img/favicon.ico">
-<link rel="stylesheet" href="css/login.css">
+<link rel="stylesheet" href="/login.css">
 </head>
 
 <body style="overflow-x:hidden">
   <header>
-    <img src="img/logo.png" onclick="location.href='index.html'" style="cursor: pointer; width : 100px; height : 50px;">
-    <span onclick="location.href='join.html'" style="cursor: pointer; margin-left: 15%;">회원가입</span>
-    <span style="margin-left: 1%; color: #FF6384; cursor: pointer" onclick="location.href='login.html'">로그인</span>
+    <img src="/logo.png" onclick="location.href='/'" style="cursor: pointer; width : 100px; height : 50px;">
+    <span onclick="location.href='join'" style="cursor: pointer; margin-left: 15%;">회원가입</span>
+    <span style="margin-left: 1%; color: #FF6384; cursor: pointer" onclick="location.href='login'">로그인</span>
   </header>
   <div class="margin">
     <div class="title">로그인</div>
@@ -22,7 +22,7 @@
   <div class="margin">
     <center>
       <div class="box">
-        <form class="login-form" action="" method="post">
+        <form class="login-form" action="users/login" method="post">
           <table width="95%" class="list-table">
             <tr class="content">
               <td>아이디</td>
@@ -35,7 +35,7 @@
               </td>
             </tr>
           </table>
-          <input type="submit" class="apply" value="로그인" onclick="location.href='submitaction.php'" style="cursor: pointer;">
+          <input type="submit" class="apply" value="로그인" onclick="location.href='list'" style="cursor: pointer;">
         </form>
       </div>
       
