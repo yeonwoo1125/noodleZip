@@ -22,9 +22,9 @@ class Memo extends Sequelize.Model {
             },
             {
                 sequelize,
-                timestamps:false,
-                tableName : 'user_tb',
-                modelName : 'User',
+                timestamps:true,
+                tableName : 'memo_tb',
+                modelName : 'Memo',
                 charset : 'utf8',
                 collate : 'utf8_general_ci',
             }
