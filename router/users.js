@@ -51,8 +51,45 @@ router.post('/',
         }
     });
 
+
+//유저 로그인
+/*
+* 200 - 로그인 성공
+* 401 - 비밀번호 틀림
+* 404 - 유저 아이디 없음
+* */
+
+router.post('/login', async (req, res) => {
+    const {userId, userPassword} = req.body;
+
+    if (!await findByUserId(userId)) {
+        return res.status(404).send({
+            message: 'User not found'
+        });
+    }
+
+    const user = await getUser(userId);
+    bcrypt.compare(userPassword, user.userPassword, (err, same) => {
+        if (same) {
+            return res.status(200).send({
+                "userId": user.userId,
+                "userName": user.userName,
+            });
+        } else {
+            return res.status(401).send({
+                message: 'UserId and password mismatch'
+            })
+        }
+    });
+});
+
+
 const findByUserId = async (id) => {
     return await User.findByPk(id) !== null;
+}
+
+const getUser = async (id) => {
+    return await User.findByPk(id);
 }
 
 module.exports = router;
