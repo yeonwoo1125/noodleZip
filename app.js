@@ -3,6 +3,10 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
+const mysql = require('./config/mysql');
+const mysqlConn = mysql.init();
+mysql.open(mysqlConn);
+
 app.set('port', process.env.PORT || 4444);
 app.set('view engine', 'html');
 app.engine('html', require('ejs').renderFile);
