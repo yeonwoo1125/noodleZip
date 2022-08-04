@@ -76,20 +76,20 @@ router.put('/:memoId/:userId',
         const userId = req.params.userId;
         const memoId = req.params.memoId;
 
-        if (!await findByUserId(userId)) {
+        const user = await findByUserId(userId)
+        if (user === null) {
             return res.status(404).send({
                 message: 'User not found'
             });
         }
-        if (!await findByUserId(memoId)) {
+
+        if (!await findByMemoId(memoId)) {
             return res.status(404).send({
                 message: 'memoId not found'
             });
         }
 
-        const user = await getUser(userId)
-
-        if (user.userId != userId) {
+        if (user.userId !== userId) {
             return res.status(409).send({
                 message: 'UserID not match'
             });
@@ -101,10 +101,11 @@ router.put('/:memoId/:userId',
                     memoTitle: memoTitle,
                     memoContent: memoContent
                 },
-                { where: { memoId: memoId } }
+                {
+                    where: { memoId: memoId }
+                }
             );
-            const memo = await Memo.findByPk(memoId)
-
+            const memo = findByMemoId(memoId);
             return res.status(200).send({
                 "memoId": memo.memoId,
                 "memoTitle": memo.memoTitle,
@@ -121,7 +122,6 @@ router.put('/:memoId/:userId',
 // 404 - memoId나 userId가 없는 경우
 
 router.delete('/:memoId/:userId',
-
     async (req, res) => {
         const reqError = validationResult(req);
         if (!reqError.isEmpty()) {
@@ -133,20 +133,21 @@ router.delete('/:memoId/:userId',
         const userId = req.params.userId;
         const memoId = req.params.memoId;
 
-        if (!await findByUserId(userId)) {
+        const user = await findByUserId(userId)
+        if (user === null) {
             return res.status(404).send({
                 message: 'User not found'
             });
         }
-        if (!await findByUserId(memoId)) {
+
+        const memo = await findByMemoId(memoId);
+        if (memo === null) {
             return res.status(404).send({
                 message: 'memoId not found'
             });
         }
 
-        const user = await getUser(userId)
-
-        if (user.userId != userId) {
+        if (user.userId !== userId) {
             return res.status(409).send({
                 message: 'UserID not match'
             });
@@ -156,21 +157,43 @@ router.delete('/:memoId/:userId',
             await Memo.destroy(
                 { where: { memoId: memoId } }
             )    
-            return res.status(200);
+            return res.status(200).send({
+                message : 'Delete Memo'
+            });
         } catch (e) {
             console.error(e);
         }
     });
 
+router.get('/:userId',async (req, res)=>{
+    const userId = req.params.userId;
+    const user = await findByUserId(userId)
+    if (user === null) {
+        return res.status(404).send({
+            message: 'User not found'
+        });
+    }
 
+    try {
+        const memos = await Memo.findAll({
+        attributes : [
+            'memoId','memoTitle','memoContent'
+        ],
+            where : {userId : userId}
+        });
 
+        return res.status(200).json(memos);
+    }catch (e) {
+        console.error(e);
+    }
+});
 
 const findByUserId = async (id) => {
-    return await User.findByPk(id) !== null;
+    return await User.findByPk(id);
 }
 
-const getUser = async (id) => {
-    return await User.findByPk(id);
+const findByMemoId = async (id)=>{
+    return await Memo.findByPk(id);
 }
 
 module.exports = router;
