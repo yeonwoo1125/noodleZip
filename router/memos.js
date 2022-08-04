@@ -7,6 +7,7 @@ const router = require('express').Router();
 
 //메모 생성
 /*
+* 201 - 메모가 생성된 경우
 * 400 - 값이 비어있는 경우
 * 404 - user을 찾을 수 없는 경우
 * */
@@ -54,7 +55,8 @@ router.post('/:userId',
 
 // 메모 수정
 // 200 - 메모가 성공적으로 수정된 경우
-// 404 - user을 찾을 수 없는 경우
+// 400 - memoTitle이나 memoContent가 비어있는 경우
+// 404 - memoId나 userId를 찾을 수 없는 경우
 // 409 - userId가 일치하지 않는 경우
 
 router.put('/:memoId/:userId',
@@ -77,6 +79,11 @@ router.put('/:memoId/:userId',
         if (!await findByUserId(userId)) {
             return res.status(404).send({
                 message: 'User not found'
+            });
+        }
+        if (!await findByUserId(memoId)) {
+            return res.status(404).send({
+                message: 'memoId not found'
             });
         }
 
@@ -111,7 +118,7 @@ router.put('/:memoId/:userId',
 
 // 메모 삭제
 // 200 - 메모가 성공적으로 삭제된 경우
-// 404 - user을 찾을 수 없는 경우
+// 404 - memoId나 userId가 없는 경우
 
 router.delete('/:memoId/:userId',
 
@@ -131,6 +138,11 @@ router.delete('/:memoId/:userId',
                 message: 'User not found'
             });
         }
+        if (!await findByUserId(memoId)) {
+            return res.status(404).send({
+                message: 'memoId not found'
+            });
+        }
 
         const user = await getUser(userId)
 
@@ -143,8 +155,7 @@ router.delete('/:memoId/:userId',
         try {
             await Memo.destroy(
                 { where: { memoId: memoId } }
-            )
-                                            
+            )    
             return res.status(200);
         } catch (e) {
             console.error(e);
