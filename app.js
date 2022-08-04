@@ -7,22 +7,20 @@ const userRouter = require('./router/users');
 const memoRouter = require('./router/memos');
 const session = require("express-session");
 
+app.use(session({
+    secret: '111111',
+    resave: false,
+    saveUninitialized: false
+}));
+
 app.set('port', process.env.PORT || 4444);
 app.set('view engine', 'html');
 app.engine('html', require('ejs').renderFile);
 
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.use(session({
-    key: 'sid',
-    secret: 'secret',
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-        maxAge: 24000 * 60 * 60 // 쿠키 유효기간 24시간
-    }
-}));
 
 sequelize.sync({force: false})
     .then(() => {

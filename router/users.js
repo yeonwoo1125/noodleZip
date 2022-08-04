@@ -60,8 +60,9 @@ router.post('/login', async (req, res) => {
     const user = await getUser(userId);
     bcrypt.compare(userPassword, user.userPassword, (err, same) => {
         if (same) {
-            res.session.userName = user.userName;
-            res.session.userId = user.userId;
+            req.session.userName = user.userName;
+            req.session.userId = user.userId;
+            req.session.save();
 
             return res.status(200).render('html/list.html', {
                 userId: user.userId,
