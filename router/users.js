@@ -21,20 +21,15 @@ router.post('/',
     async (req, res) => {
         const reqError = validationResult(req);
         if (!reqError.isEmpty()) {
-            return res.status(400).send({
-                message: reqError.array()[0].msg
-            })
+            return res.status(400).send("<script>alert('비밀번호가 짧거나 입력값이 비어 있습니다.'); history.back(); </script>")
         }
 
         const {userId, userName, userPassword} = req.body;
         const hashPw = await bcrypt.hash(userPassword, 12);
 
         if (await findByUserId(userId)) {
-            return res.status(409).send({
-                message: 'UserId is already use'
-            });
+            return res.status(409).send("<script>alert('이미 가입된 아이디 입니다.'); history.back(); </script>" );
         }
-
         try {
             const user = await User.create({
                 userId: userId,
@@ -42,10 +37,7 @@ router.post('/',
                 userPassword: hashPw
             });
 
-            return res.status(201).send({
-                "userId": user.userId,
-                "userName": user.userName
-            })
+            return res.status(201).send("<script>alert('회원가입이 완료 되었습니다.'); location.href='../logins' </script>")
         } catch (e) {
             console.error(e);
         }
@@ -63,25 +55,25 @@ router.post('/login', async (req, res) => {
     const {userId, userPassword} = req.body;
 
     if (!await findByUserId(userId)) {
-        return res.status(404).send({
-            message: 'User not found'
-        });
+        return res.status(404).send("<script>alert('비밀번호가 틀렸습니다'); history.back(); </script>")
     }
 
     const user = await getUser(userId);
     bcrypt.compare(userPassword, user.userPassword, (err, same) => {
         if (same) {
-            return res.status(200).send({
-                "userId": user.userId,
-                "userName": user.userName,
+            return res.status(200).render('html/list.html',{
+                userId: user.userId,
+                userName : user.userName,
             });
         } else {
-            return res.status(401).send({
-                message: 'UserId and password mismatch'
-            })
+            return res.status(401).send("<script>alert('아이디가 존재 하지 않습니다'); history.back();</script>")
         }
     });
 });
+
+
+
+
 
 
 const findByUserId = async (id) => {
