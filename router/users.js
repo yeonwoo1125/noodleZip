@@ -1,3 +1,6 @@
+const express = require('express');
+const app = express();
+
 const User = require('../models/user');
 
 const {validationResult, check} = require("express-validator");

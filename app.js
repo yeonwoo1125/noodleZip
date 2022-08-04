@@ -32,14 +32,21 @@ app.get('/', (req, res) => {
     res.render('html/index');
 });
 //로그인
-app.get('/logins', (req, res) => {
+app.get('/login', (req, res) => {
     res.render('html/login');
 });
 //회원가입
-app.get('/joins', (req, res) => {
+app.get('/join', (req, res) => {
     res.render('html/join');
 });
-
+// 메모 쓰기
+app.get('/memo', (req, res) => {
+    res.render('html/memo');
+});
+// 메모리스트
+app.get('/list', (req, res) => {
+    res.render('html/list');
+});
 
 app.listen(app.get('port'), () => {
     console.log('http://localhost:' + app.get('port'));
