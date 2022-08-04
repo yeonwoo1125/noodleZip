@@ -7,7 +7,7 @@ const router = require('express').Router();
 
 //메모 생성
 /*
-* 400 - user을 찾을 수 없는 경우
+* 400 - 값이 비어있는 경우
 * 404 - user을 찾을 수 없는 경우
 * */
 router.post('/:userId',
@@ -49,7 +49,7 @@ router.post('/:userId',
             console.error(e);
         }
     });
-    
+
     
 const findByUserId = async (id) => {
     return await User.findByPk(id) !== null;
