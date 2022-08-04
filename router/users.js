@@ -28,16 +28,15 @@ router.post('/',
         const hashPw = await bcrypt.hash(userPassword, 12);
 
         if (await findByUserId(userId)) {
-            return res.status(409).send("<script>alert('이미 가입된 아이디 입니다.'); history.back(); </script>" );
+            return res.status(409).send("<script>alert('이미 가입된 아이디 입니다.'); history.back(); </script>");
         }
         try {
-            const user = await User.create({
+            await User.create({
                 userId: userId,
                 userName: userName,
                 userPassword: hashPw
             });
-
-            return res.status(201).send("<script>alert('회원가입이 완료 되었습니다.'); location.href='../logins' </script>")
+            return res.status(201).send("<script>alert('회원가입이 완료 되었습니다.'); location.href='../login' </script>")
         } catch (e) {
             console.error(e);
         }
@@ -55,26 +54,24 @@ router.post('/login', async (req, res) => {
     const {userId, userPassword} = req.body;
 
     if (!await findByUserId(userId)) {
-        return res.status(404).send("<script>alert('비밀번호가 틀렸습니다'); history.back(); </script>")
+        return res.status(404).send("<script>alert('해당하는 유저가 존재하지 않습니다.'); history.back(); </script>")
     }
 
     const user = await getUser(userId);
     bcrypt.compare(userPassword, user.userPassword, (err, same) => {
         if (same) {
-            return res.status(200).render('html/list.html',{
+            res.session.userName = user.userName;
+            res.session.userId = user.userId;
+
+            return res.status(200).render('html/list.html', {
                 userId: user.userId,
-                userName : user.userName,
+                userName: user.userName,
             });
         } else {
-            return res.status(401).send("<script>alert('아이디가 존재 하지 않습니다'); history.back();</script>")
+            return res.status(401).send("<script>alert('로그인에 실패하였습니다.'); history.back();</script>")
         }
     });
 });
-
-
-
-
-
 
 const findByUserId = async (id) => {
     return await User.findByPk(id) !== null;
