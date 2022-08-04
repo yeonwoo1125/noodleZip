@@ -1,16 +1,16 @@
 const Memo = require('../models/memo');
+const User = require('../models/user');
 
-const {validationResult, check} = require("express-validator");
+const { validationResult, check } = require("express-validator");
 const router = require('express').Router();
 
 
-//유저 생성
+//메모 생성
 /*
-* 201 - 유저 생성 성공
-* 400 - password가 짧거나 입력값이 하나라도 비어있는 경우
-* 409 - 이미 가입된 userId인 경우
+* 400 - 값이 비어있는 경우
+* 404 - user을 찾을 수 없는 경우
 * */
-router.post('/',
+router.post('/:userId',
     [
         check('memoTitle', 'memoTitle is empty').trim().not().isEmpty(),
         check('memoContent', 'memoContent is empty').trim().not().isEmpty()
@@ -23,7 +23,7 @@ router.post('/',
             })
         }
 
-        const {memoTitle, memoContent} = req.body;
+        const { memoTitle, memoContent } = req.body;
         const userId = req.params.userId;
 
         if (!await findByUserId(userId)) {
@@ -35,22 +35,28 @@ router.post('/',
         try {
             const memo = await Memo.create({
                 memoTitle: memoTitle,
-                memoContent: memoContent
+                memoContent: memoContent,
+                userId : userId
             });
 
             return res.status(201).send({
                 "memoId": memo.memoId,
                 "memoTitle": memo.memoTitle,
-                "memoContent": memo.memoContent
+                "memoContent": memo.memoContent,
+                "userId" : memo.userId
             })
         } catch (e) {
             console.error(e);
         }
     });
 
-
+    
 const findByUserId = async (id) => {
     return await User.findByPk(id) !== null;
+}
+
+const getUser = async (id) => {
+    return await User.findByPk(id);
 }
 
 module.exports = router;
