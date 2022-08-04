@@ -109,6 +109,50 @@ router.put('/:memoId/:userId',
     });
 
 
+// 메모 삭제
+// 200 - 메모가 성공적으로 삭제된 경우
+// 404 - user을 찾을 수 없는 경우
+
+router.delete('/:memoId/:userId',
+
+    async (req, res) => {
+        const reqError = validationResult(req);
+        if (!reqError.isEmpty()) {
+            return res.status(400).send({
+                message: reqError.array()[0].msg
+            })
+        }
+
+        const userId = req.params.userId;
+        const memoId = req.params.memoId;
+
+        if (!await findByUserId(userId)) {
+            return res.status(404).send({
+                message: 'User not found'
+            });
+        }
+
+        const user = await getUser(userId)
+
+        if (user.userId != userId) {
+            return res.status(409).send({
+                message: 'UserID not match'
+            });
+        }
+
+        try {
+            await Memo.destroy(
+                { where: { memoId: memoId } }
+            )
+                                            
+            return res.status(200);
+        } catch (e) {
+            console.error(e);
+        }
+    });
+
+
+
 
 const findByUserId = async (id) => {
     return await User.findByPk(id) !== null;
