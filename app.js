@@ -32,14 +32,14 @@ app.get('/', (req, res) => {
     res.render('html/index');
 });
 //로그인
-app.get('/login', (req, res) => {
+app.get('/logins', (req, res) => {
     res.render('html/login');
 });
 //회원가입
-app.get('/join', (req, res) => {
+app.get('/joins', (req, res) => {
     res.render('html/join');
 });
-//메모리스트 -메모 있을 때 
+/*//메모리스트 -메모 있을 때
 app.get('/list', (req, res) => {
     res.render('html/list');
 });
@@ -54,6 +54,11 @@ app.get('/memo', (req, res) => {
 //메모수정
 app.get('/memoedit', (req, res) => {
     res.render('html/memoedit');
+});*/
+
+app.get('/users/login',(req, res)=>{
+    res.render('html/list.html');
+
 });
 
 app.listen(app.get('port'), () => {
