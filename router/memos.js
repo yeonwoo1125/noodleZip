@@ -40,7 +40,7 @@ router.post('/:userId',
                 memoContent: memoContent,
                 userId: userId
             });
-
+    
             return res.status(201).send({
                 "memoId": memo.memoId,
                 "memoTitle": memo.memoTitle,

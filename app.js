@@ -50,11 +50,17 @@ app.get('/join', (req, res) => {
 });
 // 메모 쓰기
 app.get('/memo', (req, res) => {
-    res.render('html/memo');
+    res.render('html/memo', {
+        userId: req.session.userId ,
+        userName: req.session.userName
+    });
 });
 // 메모리스트
 app.get('/list', (req, res) => {
-    res.render('html/list');
+     res.render('html/list.html', {
+        userId: req.session.userId ,
+        userName: req.session.userName
+    });
 });
 
 app.listen(app.get('port'), () => {

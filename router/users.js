@@ -66,10 +66,10 @@ router.post('/login', async (req, res) => {
             req.session.userName = user.userName;
             req.session.userId = user.userId;
             req.session.save();
-
+            
             return res.status(200).render('html/list.html', {
-                userId: user.userId,
-                userName: user.userName,
+                userId: req.session.userId ,
+                userName: req.session.userName
             });
         } else {
             return res.status(401).send("<script>alert('로그인에 실패하였습니다.'); history.back();</script>")
