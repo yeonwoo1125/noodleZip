@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const {sequelize} = require('./models/index');
 const userRouter = require('./router/users');
-
+const memoRouter = require('./router/memos');
 
 app.set('port', process.env.PORT || 4444);
 app.set('view engine', 'html');
@@ -22,6 +22,7 @@ sequelize.sync({force: false})
     });
 
 app.use('/users', userRouter)
+app.use('/memos', memoRouter)
 
 app.get('/', (req, res) => {
     res.render('html/index');
