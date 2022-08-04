@@ -27,7 +27,8 @@ router.post('/:userId',
         const { memoTitle, memoContent } = req.body;
         const userId = req.params.userId;
 
-        if (!await findByUserId(userId)) {
+        const user = await findByUserId(userId);
+        if (user === null) {
             return res.status(404).send({
                 message: 'User not found'
             });
@@ -50,7 +51,6 @@ router.post('/:userId',
             console.error(e);
         }
     });
-
 
 
 // 메모 수정
