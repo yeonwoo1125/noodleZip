@@ -5,13 +5,22 @@ const app = express();
 const {sequelize} = require('./models/index');
 const userRouter = require('./router/users');
 const memoRouter = require('./router/memos');
+const session = require("express-session");
+
+app.use(session({
+    secret: '111111',
+    resave: false,
+    saveUninitialized: false
+}));
 
 app.set('port', process.env.PORT || 4444);
 app.set('view engine', 'html');
 app.engine('html', require('ejs').renderFile);
 
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+
 
 sequelize.sync({force: false})
     .then(() => {
