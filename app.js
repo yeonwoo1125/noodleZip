@@ -24,7 +24,6 @@ sequelize.sync({force: false})
 //이미지, css 폴더
 app.use('/', express.static("./public/css"));
 app.use('/', express.static("./public/img"));
-
 app.use('/users', userRouter)
 
 //인덱스
@@ -39,27 +38,7 @@ app.get('/logins', (req, res) => {
 app.get('/joins', (req, res) => {
     res.render('html/join');
 });
-/*//메모리스트 -메모 있을 때
-app.get('/list', (req, res) => {
-    res.render('html/list');
-});
-//메모리스트 -메모 없을 때 
-app.get('/notList', (req, res) => {
-    res.render('html/notList');
-});
-//메모쓰기
-app.get('/memo', (req, res) => {
-    res.render('html/memo');
-});
-//메모수정
-app.get('/memoedit', (req, res) => {
-    res.render('html/memoedit');
-});*/
 
-app.get('/users/login',(req, res)=>{
-    res.render('html/list.html');
-
-});
 
 app.listen(app.get('port'), () => {
     console.log('http://localhost:' + app.get('port'));
