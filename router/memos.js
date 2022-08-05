@@ -155,7 +155,7 @@ router.delete('/delete/:memoId/:userId',
             await Memo.destroy(
                 {where: {memoId: memoId}}
             )
-            return res.status(200).redirect('/memos/' + req.session.userId);
+
         } catch (e) {
             console.error(e);
         }
@@ -179,6 +179,7 @@ router.get('/:userId', async (req, res) => {
             ],
             where: {userId: userId}
         });
+
         return res.status(200).render('html/list', {memos});
     } catch (e) {
         console.error(e);
@@ -193,7 +194,7 @@ router.get('/:userId', async (req, res) => {
 * */
 
 router.get('/:memoId/:userId', async (req, res) => {
-    console.log('memo list');
+
     const userId = req.params.userId;
     const memoId = req.params.memoId;
 
