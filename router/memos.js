@@ -41,12 +41,7 @@ router.post('/:userId',
                 userId: userId
             });
     
-            return res.status(201).send({
-                "memoId": memo.memoId,
-                "memoTitle": memo.memoTitle,
-                "memoContent": memo.memoContent,
-                "userId": memo.userId
-            })
+            return res.status(201).send("<script>alert('메모가 작성 되었습니다.'); location.href='haejeong0624' </script>")
         } catch (e) {
             console.error(e);
         }
@@ -165,28 +160,30 @@ router.delete('/:memoId/:userId',
         }
     });
 
+
 router.get('/:userId',async (req, res)=>{
     const userId = req.params.userId;
     const user = await findByUserId(userId)
     if (user === null) {
         return res.status(404).send({
             message: 'User not found'
-        });
-    }
+        });    }
 
     try {
         const memos = await Memo.findAll({
         attributes : [
-            'memoId','memoTitle','memoContent'
+            'memoId','memoTitle','memoContent','userId'
         ],
             where : {userId : userId}
         });
 
-        return res.status(200).json(memos);
+        return res.status(200).render('html/list',{memos});
     }catch (e) {
         console.error(e);
     }
 });
+
+
 
 const findByUserId = async (id) => {
     return await User.findByPk(id);
