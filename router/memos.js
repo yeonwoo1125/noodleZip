@@ -41,7 +41,7 @@ router.post('/:userId',
                 userId: userId
             });
     
-            return res.status(201).send("<script>alert('메모가 작성 되었습니다.'); location.href='haejeong0624' </script>")
+            return res.status(201).send("<script>alert('메모가 작성 되었습니다.'); location.href='"+userId+"' </script>")
         } catch (e) {
             console.error(e);
         }
