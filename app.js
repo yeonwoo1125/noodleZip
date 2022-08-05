@@ -55,6 +55,19 @@ app.get('/memo', (req, res) => {
         userName: req.session.userName
     });
 });
+
+// 메모 수정
+app.get('/memoedit/:memoId/:userId', (req, res) =>{
+    //let memoId = req.params.memoId;
+
+
+    res.render('html/memoedit', {
+        userId: req.session.userId ,
+        userName: req.session.userName,
+        memoId :req.params.memoId
+    });
+})
+
 // 메모리스트
 app.get('/list', (req, res) => {
      res.render('html/list.html', {
@@ -62,6 +75,17 @@ app.get('/list', (req, res) => {
         userName: req.session.userName
     });
 });
+
+//삭제
+app.get('/:memoId/:userId', (req, res) => {
+    res.render('html/list.html', {
+       userId: req.session.userId ,
+       userName: req.session.userName,
+       memoId :req.params.memoId
+   });
+});
+
+
 
 app.listen(app.get('port'), () => {
     console.log('http://localhost:' + app.get('port'));

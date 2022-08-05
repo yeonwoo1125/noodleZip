@@ -12,12 +12,10 @@ tr:hover {
     background-color: #F5F5F5; 
 } 
 th{
-    /*background-color: rgb(255, 230, 233);*/
+  background-color: white;
 }
 
-td{
-    background-color: white;
-}
+
 /*
 .listnumber{
   padding-left: 38px;
