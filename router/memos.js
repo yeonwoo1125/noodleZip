@@ -78,7 +78,8 @@ router.put('/:memoId/:userId',
             });
         }
 
-        if (!await findByMemoId(memoId)) {
+        let memo = await findByMemoId(memoId);
+        if (memo === null) {
             return res.status(404).send({
                 message: 'memoId not found'
             });
@@ -100,7 +101,8 @@ router.put('/:memoId/:userId',
                     where: { memoId: memoId }
                 }
             );
-            const memo = findByMemoId(memoId);
+
+            memo = await findByMemoId(memoId);
             return res.status(200).send({
                 "memoId": memo.memoId,
                 "memoTitle": memo.memoTitle,
@@ -138,7 +140,7 @@ router.delete('/:memoId/:userId',
         const memo = await findByMemoId(memoId);
         if (memo === null) {
             return res.status(404).send({
-                message: 'memoId not found'
+                message: 'MemoId not found'
             });
         }
 
