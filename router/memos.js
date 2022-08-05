@@ -1,7 +1,7 @@
 const Memo = require('../models/memo');
 const User = require('../models/user');
 
-const { validationResult, check } = require("express-validator");
+const {validationResult, check} = require("express-validator");
 const router = require('express').Router();
 
 
@@ -24,7 +24,7 @@ router.post('/:userId',
             })
         }
 
-        const { memoTitle, memoContent } = req.body;
+        const {memoTitle, memoContent} = req.body;
         const userId = req.params.userId;
 
         const user = await findByUserId(userId);
@@ -40,8 +40,8 @@ router.post('/:userId',
                 memoContent: memoContent,
                 userId: userId
             });
-    
-            return res.status(201).send("<script>alert('메모가 작성 되었습니다.'); location.href='"+userId+"' </script>")
+
+            return res.status(201).send("<script>alert('메모가 작성 되었습니다.'); location.href='" + userId + "' </script>")
         } catch (e) {
             console.error(e);
         }
@@ -67,7 +67,7 @@ router.put('/:memoId/:userId',
             })
         }
 
-        const { memoTitle, memoContent } = req.body;
+        const {memoTitle, memoContent} = req.body;
         const userId = req.params.userId;
         const memoId = req.params.memoId;
 
@@ -98,7 +98,7 @@ router.put('/:memoId/:userId',
                     memoContent: memoContent
                 },
                 {
-                    where: { memoId: memoId }
+                    where: {memoId: memoId}
                 }
             );
 
@@ -152,10 +152,10 @@ router.delete('/:memoId/:userId',
 
         try {
             await Memo.destroy(
-                { where: { memoId: memoId } }
-            )    
+                {where: {memoId: memoId}}
+            )
             return res.status(200).send({
-                message : 'Delete Memo'
+                message: 'Delete Memo'
             });
         } catch (e) {
             console.error(e);
@@ -163,36 +163,79 @@ router.delete('/:memoId/:userId',
     });
 
 
-router.get('/:userId',async (req, res)=>{
+router.get('/:userId', async (req, res) => {
     const userId = req.params.userId;
     const user = await findByUserId(userId)
     if (user === null) {
         return res.status(404).send({
             message: 'User not found'
-        });    }
+        });
+    }
 
     try {
         const memos = await Memo.findAll({
-        attributes : [
-            'memoId','memoTitle','memoContent','userId'
-        ],
-            where : {userId : userId}
+            attributes: [
+                'memoId', 'memoTitle', 'memoContent', 'userId'
+            ],
+            where: {userId: userId}
         });
 
-        return res.status(200).render('html/list',{memos});
-    }catch (e) {
+        return res.status(200).render('html/list', {memos});
+    } catch (e) {
         console.error(e);
     }
 });
 
+//메모 상세 조회
+/*
+* 200 - 조회 성공
+* 404 - 유저 및 메모 없음
+* 409 - 유저가 쓴 메모가 아님
+* */
 
+router.get('/:memoId/:userId', async (req, res) => {
+    const userId = req.params.userId;
+    const memoId = req.params.memoId;
+
+    const user = await findByUserId(userId)
+    if (user === null) {
+        return res.status(404).send({
+            message: 'User not found'
+        });
+    }
+
+    const memo = await findByMemoId(memoId);
+    if (memo === null) {
+        return res.status(404).send({
+            message: 'Memo not found'
+        });
+    }
+
+    const memoByUser = await findByUserIdAndMemoId(userId, memoId);
+    if(memoByUser.length === 0){
+        return res.status(409).send({
+            message : 'Not a user-written note'
+        })
+    }
+
+    return res.status(200).send({
+        memoTitle : memo.memoTitle,
+        memoContent : memo.memoContent
+    });
+});
 
 const findByUserId = async (id) => {
     return await User.findByPk(id);
 }
 
-const findByMemoId = async (id)=>{
+const findByMemoId = async (id) => {
     return await Memo.findByPk(id);
+}
+
+const findByUserIdAndMemoId = async (userId, memoId) => {
+    return await Memo.findAll({
+        where: {userId: userId, memoId: memoId}
+    });
 }
 
 module.exports = router;
