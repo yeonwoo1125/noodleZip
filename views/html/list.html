@@ -30,26 +30,28 @@
   <div class="margin">
     <center>
         <table>
+          <colgroup>
+            <col width="15%" />
+              <col width="40%" />
+              <col width="80%" />
+          </colgroup>
             <tr>            
-                <th>순번</th>
-                <th>제목</th>
-                <th>내용</th>
+                <th class="listnumber" style="background-color: rgb(255, 230, 233)">순번</th>
+                <th class="listtitle" style="background-color: rgb(255, 230, 233)">제목</th>
+                <th class="listcontent" style="background-color: rgb(255, 230, 233)">내용</th>
             </tr>     
-            <table>
+            <% memos.forEach(function (item, index){ %> 
+              <tr onClick="location.href='<%=item.memoId %>/<%= item.userId %>'" >       
+              <th class = "memoid"><%=item.memoId %></th>
+              <th class = "memotitle"><%=item.memoTitle  %> </th>
+              <th class = "memocontent"><%=item.memoContent  %> </th>
+           
+      
+          </tr>
+          <%  }); %>
    
-              <% memos.forEach(function (item, index){ %> 
-                  <tr onClick="location.href='<%=item.memoId %>/<%= item.userId %>'">       
-                  <td><%=item.memoId %></td>
-                  <td><%=item.memoTitle  %> </td>
-                  <td><%=item.memoContent  %> </td>
-               
-          
-              </tr>
-              <%  }); %>
-          </table>  
-         
-        </table>     
 
+          </table>  
 
       
     </center>
