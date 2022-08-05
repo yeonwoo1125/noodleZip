@@ -11,6 +11,7 @@
 </head>
 
 <body style="overflow-x:hidden">
+  <% if(memos.length==0){ %> <script>  window.location.href='../not-list'; </script> <% } %>
   <header>
     <img src="/logo.png" onclick="location.href='/'" style="cursor: pointer; width : 100px; height : 50px;">
     <span onclick="location.href='/login'" style="cursor: pointer; margin-left: 15%;">로그아웃</span>
@@ -33,24 +34,20 @@
           <colgroup>
             <col width="15%" />
               <col width="40%" />
-              <col width="80%" />
+
           </colgroup>
-            <tr>            
+            <tr>                          <col width="80%" />
                 <th class="listnumber" style="background-color: rgb(255, 230, 233)">순번</th>
                 <th class="listtitle" style="background-color: rgb(255, 230, 233)">제목</th>
                 <th class="listcontent" style="background-color: rgb(255, 230, 233)">내용</th>
             </tr>     
             <% memos.forEach(function (item, index){ %> 
-              <tr onClick="location.href='<%=item.memoId %>/<%= item.userId %>'" >       
-              <th class = "memoid"><%=item.memoId %></th>
+              <tr>       
+              <th class = "memoid"><%=index+1 %></th>
               <th class = "memotitle"><%=item.memoTitle  %> </th>
-              <th class = "memocontent"><%=item.memoContent  %> </th>
-           
-      
+              <th class = "memoContent"><%=item.memoContent  %> </th>
           </tr>
           <%  }); %>
-   
-
           </table>  
 
       

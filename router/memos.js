@@ -118,8 +118,9 @@ router.put('/:memoId/:userId',
 // 200 - 메모가 성공적으로 삭제된 경우
 // 404 - memoId나 userId가 없는 경우
 
-router.delete('/:memoId/:userId',
+router.delete('/delete/:memoId/:userId',
     async (req, res) => {
+        console.log('dle')
         const reqError = validationResult(req);
         if (!reqError.isEmpty()) {
             return res.status(400).send({
@@ -154,9 +155,7 @@ router.delete('/:memoId/:userId',
             await Memo.destroy(
                 {where: {memoId: memoId}}
             )
-            return res.status(200).send({
-                message: 'Delete Memo'
-            });
+
         } catch (e) {
             console.error(e);
         }
@@ -165,6 +164,7 @@ router.delete('/:memoId/:userId',
 
 router.get('/:userId', async (req, res) => {
     const userId = req.params.userId;
+    console.log('1',userId);
     const user = await findByUserId(userId)
     if (user === null) {
         return res.status(404).send({
@@ -194,6 +194,7 @@ router.get('/:userId', async (req, res) => {
 * */
 
 router.get('/:memoId/:userId', async (req, res) => {
+
     const userId = req.params.userId;
     const memoId = req.params.memoId;
 
