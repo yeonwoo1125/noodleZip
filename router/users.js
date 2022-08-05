@@ -53,21 +53,18 @@ router.post('/',
 router.post('/login', async (req, res) => {
     const {userId, userPassword} = req.body;
 
-    if (!await findByUserId(userId)) {
+    const user = await findByUserId(userId);
+    if (user === null) {
         return res.status(404).send("<script>alert('해당하는 유저가 존재하지 않습니다.'); history.back(); </script>")
     }
 
-    const user = await getUser(userId);
     bcrypt.compare(userPassword, user.userPassword, (err, same) => {
         if (same) {
             req.session.userName = user.userName;
             req.session.userId = user.userId;
             req.session.save();
 
-            return res.status(200).render('html/list.html', {
-                userId: user.userId,
-                userName: user.userName,
-            });
+            return res.status(200).redirect('/memos/' + req.session.userId)
         } else {
             return res.status(401).send("<script>alert('로그인에 실패하였습니다.'); history.back();</script>")
         }
@@ -75,10 +72,6 @@ router.post('/login', async (req, res) => {
 });
 
 const findByUserId = async (id) => {
-    return await User.findByPk(id) !== null;
-}
-
-const getUser = async (id) => {
     return await User.findByPk(id);
 }
 

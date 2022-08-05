@@ -12,8 +12,8 @@
 <body style="overflow-x:hidden">
     <header>
         <img src="/logo.png" onclick="location.href='/'" style="cursor: pointer; width : 100px; height : 50px;">
-        <span onclick="location.href='login'" style="cursor: pointer; margin-left: 15%;">로그아웃</span>
-        <span onclick="location.href='list'" style="cursor: pointer; margin-left: 1%;">메모확인</span>
+        <span onclick="location.href='/login'" style="cursor: pointer; margin-left: 15%;">로그아웃</span>
+        <span onclick="location.href='/memos/<%=userId %>'" style="cursor: pointer; margin-left: 1%;">나의메모</span>
         <span style="margin-left: 1%; color: #FF6384; cursor: pointer" onclick="location.href='memo'">메모쓰기</span>
       </header>
   <div class="margin">
@@ -23,11 +23,11 @@
   <div class="margin">
     <center>
       <div class="box">
-        <form class="login-form" action="" method="post">
+        <form class="login-form" action="/memos/<%=userId %>" method="post">
           <table width="95%" class="list-table">
             <tr class="content">
               <td>제목</td>
-              <td><input id="hakbun" type="text" name="student_id" size="50" required>
+              <td><input id="hakbun" type="text" name="memoTitle" size="50" required>
               </td>
             </tr>
             <tr> 
@@ -38,7 +38,7 @@
             <tr class="content">
               <td>내용</td>
               <td colspan="2">
-                <textarea  id="test" name="content" onkeyup="len_chk()"
+                <textarea  id="test" name="memoContent" onkeyup="len_chk()"
                   rows="6" placeholder="내용을 입력해주세요. (100자 이내)" required></textarea>
                   <div id="test_cnt" style="margin-left: 130px;">(0 / 100)</div>
               </td>

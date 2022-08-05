@@ -1,4 +1,5 @@
 table {
+
     border-collapse: collapse;
     width: 100%;
 }
@@ -8,7 +9,34 @@ th, td {
 }
 tr:hover {     
     cursor: pointer; 
-    background-color: #F5F5F5; } 
-  th{
-    background-color: rgb(255, 230, 233);
-  }
+    background-color: #F5F5F5; 
+} 
+th{
+  background-color: white;
+}
+
+
+/*
+.listnumber{
+  padding-left: 38px;
+}
+.listtitle{
+  padding-left: 20px;
+}
+
+.listcontent{
+    padding-right: 42px;
+}
+
+.memoid{
+  padding-left: 94px;
+  text-align : center;
+}
+.memotitle{
+  padding-right: 180px;
+  text-align : center;
+}
+.memocontent{
+  padding-right: 116px;
+  text-align : center;
+}*/

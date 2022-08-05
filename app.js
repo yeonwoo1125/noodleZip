@@ -41,13 +41,56 @@ app.get('/', (req, res) => {
     res.render('html/index');
 });
 //로그인
-app.get('/logins', (req, res) => {
+app.get('/login', (req, res) => {
     res.render('html/login');
 });
 //회원가입
-app.get('/joins', (req, res) => {
+app.get('/join', (req, res) => {
     res.render('html/join');
 });
+// 메모 쓰기
+app.get('/memo', (req, res) => {
+    res.render('html/memo', {
+        userId: req.session.userId ,
+        userName: req.session.userName
+    });
+});
+
+// 메모 수정
+app.get('/memoedit/:memoId/:userId', (req, res) =>{
+    //let memoId = req.params.memoId;
+
+
+    res.render('html/memoedit', {
+        userId: req.session.userId ,
+        userName: req.session.userName,
+        memoId :req.params.memoId
+    });
+})
+
+// 메모리스트
+app.get('/list', (req, res) => {
+     res.render('html/list.html', {
+        userId: req.session.userId ,
+        userName: req.session.userName
+    });
+});
+
+//삭제
+app.get('/:memoId/:userId', (req, res) => {
+    res.render('html/list.html', {
+       userId: req.session.userId ,
+       userName: req.session.userName,
+       memoId :req.params.memoId
+   });
+});
+
+// 메모리스트
+app.get('/not-list', (req, res) => {
+    res.render('html/not-list');
+});
+
+
 
 
 app.listen(app.get('port'), () => {

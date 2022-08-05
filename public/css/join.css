@@ -9,24 +9,24 @@ html, body {
 }
 
 header {
-	height: 8%;
-	background-color: white;
-	box-shadow: 0px 0px 20px #D5D8E0;
+   height: 8%;
+   background-color: white;
+   box-shadow: 0px 0px 20px #D5D8E0;
 }
 
 header:after{display:inline-block; height:100%; content:""; vertical-align:middle;}
 header img {
-	height: 25%;
-	vertical-align:middle;
-	margin-left: 19.5%;
-	margin-right: 40%;
+   height: 25%;
+   vertical-align:middle;
+   margin-left: 19.5%;
+   margin-right: 40%;
 }
 
 header span {
-	vertical-align:middle;
-	font-size: 0.85em;
-	font-weight: bold;
-	color: #393939;
+   vertical-align:middle;
+   font-size: 0.85em;
+   font-weight: bold;
+   color: #393939;
 }
 
 button{
@@ -89,7 +89,7 @@ button{
   padding-bottom: 4%;
   padding-left: 5%;
   padding-right: 5%;
-	margin-top: 10%;
+   margin-top: 10%;
   margin-bottom: 10%;
   font-family: 'Noto Sans KR', sans-serif;
   color: white;
@@ -120,17 +120,16 @@ button{
 }
 
 #name {
-  float:left; width: 33%; height:50px
+  float:left; width: 60%; height: 50px; font-size: 0.8em; margin-left: 8%;
 }
 
-#userid {
-  float:left; width: 33%; height:50px
+#userId { 
+  float:left; width: 60%; height:50px; font-size: 0.8em; margin-left: 8%;
 }
 
-#userpass {
-  float:left; width: 33%; height:50px
+#userPassword {
+  float:left; width: 60%; height:50px; font-size: 0.8em; margin-left: 8%;
 }
-
 
 table {
   border-collapse: separate;

@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
   <title>noodle.zip</title>
-	<link rel="shortcut icon" href="img/favicon.ico">
+   <link rel="shortcut icon" href="img/favicon.ico">
 <link rel="stylesheet" href="/memoedit.css">
 </head>
 
@@ -23,11 +23,11 @@
   <div class="margin">
     <center>
       <div class="box">
-        <form class="login-form" action="" method="post">
+        <form class="login-form" action=""  method="post">
           <table width="95%" class="list-table">
             <tr class="content">
               <td>제목</td>
-              <td><input id="hakbun" type="text" name="student_id" size="50" required>
+              <td><input id="hakbun" type="text" name="memoTitle" size="50" required>
               </td>
             </tr>
             <tr> 
@@ -38,7 +38,7 @@
             <tr class="content">
               <td>내용</td>
               <td colspan="2">
-                <textarea  id="test" name="content" onkeyup="len_chk()"
+                <textarea  id="test" name="memoContent" onkeyup="len_chk()"
                   rows="6" placeholder="내용을 입력해주세요. (100자 이내)" required></textarea>
                   <div id="test_cnt" style="margin-left: 130px;">(0 / 100)</div>
               </td>
