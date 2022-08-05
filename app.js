@@ -85,6 +85,12 @@ app.get('/:memoId/:userId', (req, res) => {
    });
 });
 
+// 메모리스트
+app.get('/not-list', (req, res) => {
+    res.render('html/not-list');
+});
+
+
 
 
 app.listen(app.get('port'), () => {
